@@ -84,9 +84,10 @@ function gotoService() {
     &__button {
       position: absolute;
       bottom: 20px;
-      padding: 8px;
+      right: 4px;
+      padding: 8px 4px;
       border-radius: 8px;
-      font-size: 10px;
+      font-size: 8px;
       font-weight: 600;
       background-color: $secondary;
       transition: 0.3s;

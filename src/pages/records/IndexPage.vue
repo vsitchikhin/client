@@ -31,7 +31,7 @@ const body = {
   user_id: user?.id,
 }
 
-serviceService.loadRecords(body);
+setInterval(serviceService.loadRecords(body), 15000);
 
 function gotoLogin() {
   router.push({path: '/signup'})
