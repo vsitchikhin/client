@@ -1,13 +1,18 @@
 import {Service} from 'stores/service';
 import {mainPageStore} from 'stores/MainPage/mainPage.store';
-import {BASE_URL} from 'stores/consts';
+import {staffStore} from 'stores/MainPage/staff.store';
+import {imagesStore} from 'stores/images/images.store';
 
 export class MainPageService extends Service {
   private store;
+  private staffStore;
+  private imagesStore;
 
   public constructor() {
     super();
     this.store = mainPageStore();
+    this.staffStore = staffStore();
+    this.imagesStore = imagesStore();
   }
 
   public get images() {
@@ -19,22 +24,12 @@ export class MainPageService extends Service {
   }
 
   public async loadImages() {
-    const images = fetch(BASE_URL + '/')
-      .then((response) => response.json())
-      .then(data => data);
-
-    images.then((res) => {
-      this.store.SET_IMAGES_PAYLOAD(res.payload)
-    });
+    const images = this.imagesStore.images;
+    this.store.SET_IMAGES_PAYLOAD(images);
   }
 
   public async loadStaff() {
-    const staff = fetch(BASE_URL + '/staff')
-      .then((response) => response.json())
-      .then(data => data);
-
-    staff.then(res => {
-      this.store.SET_STAFF_PAYLOAD(res.payload)
-    });
+    const staff = this.staffStore.staff;
+    this.store.SET_STAFF_PAYLOAD(staff);
   }
 }

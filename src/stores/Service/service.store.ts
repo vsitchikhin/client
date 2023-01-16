@@ -1,25 +1,26 @@
 import {defineStore} from 'pinia';
-import {RecordDto, ServiceFullDto} from 'stores/main.types';
 
 export const serviceStore = defineStore({
   id: 'service',
 
   state: () => ({
-    service: [] as ServiceFullDto[],
-    records: [] as RecordDto[],
+    service: [],
+    records: [],
   }),
 
   actions: {
-    SET_SERVICE_PAYLOAD(payload: ServiceFullDto[]) {
+    SET_SERVICE_PAYLOAD(payload) {
       this.service = payload;
     },
 
-    SET_NEW_RECORD(payload: RecordDto) {
+    SET_NEW_RECORD(payload) {
       this.records.push(payload);
     },
 
-    DELETE_RECORD(payload: RecordDto) {
-      this.records = this.records.filter(record => record.id !== payload.id);
+    DELETE_RECORD(payload) {
+      console.log(payload);
+      console.log(this.records)
+      this.records = this.records.filter(record => record.value.id !== payload.value.id);
     }
   }
 })

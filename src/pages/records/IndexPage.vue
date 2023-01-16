@@ -32,7 +32,7 @@ const body = {
 }
 
 if (user.id) {
-  setInterval(serviceService.loadRecords(body), 15000);
+  serviceService.loadRecords(body);
 }
 
 function gotoLogin() {

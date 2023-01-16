@@ -1,7 +1,5 @@
 import {Service} from 'stores/service';
 import {authStore} from 'stores/Auth/auth.store';
-import {BASE_URL} from 'stores/consts';
-import {UserDto, UserShortDto} from 'stores/main.types';
 
 export class AuthService extends Service {
   private store;
@@ -15,31 +13,17 @@ export class AuthService extends Service {
     return this.store.user;
   }
 
-  public async registerNewUser(user: UserDto) {
-    const payload = await fetch(BASE_URL + '/login', {
-      method: 'POST',
-      body: JSON.stringify(user),
-    });
-
-    return payload.json();
+  public async registerNewUser(user: any) {
+    this.store.PUSH_NEW_USER(user)
   }
 
-  public async loginUser(user: UserShortDto) {
-    if (this.user.email) {
-      return;
-    }
-
-    const payload = fetch(BASE_URL + '/signup', {
-      method: 'POST',
-      body: JSON.stringify(user),
-    }).then(res => res.json()).then(data => data);
-    payload.then(res => {
-      console.log(res)
-      this.store.SET_USER_PAYLOAD(res.payload[0])
-    });
+  public async loginUser(user: any) {
+    const users = this.store.users;
+    const loginUser = users.find(u => u.login === user.login && u.password === user.password);
+    this.store.SET_USER_PAYLOAD(loginUser);
   }
 
   public logout() {
-    this.store.SET_USER_PAYLOAD({} as UserDto)
+    this.store.SET_USER_PAYLOAD({})
   }
 }

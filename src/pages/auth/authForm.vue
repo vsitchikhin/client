@@ -8,19 +8,18 @@
 </template>
 
 <script setup lang="ts">
-import {UserShortDto} from 'stores/main.types';
 import {AuthService} from 'stores/Auth/auth.service';
 import {useRouter} from 'vue-router';
 
 const authService = new AuthService();
 const router = useRouter();
 
-const User: UserShortDto = {
+const User = {
   login: '',
   password: '',
 }
 
-function signIn(User: UserShortDto) {
+function signIn(User) {
   authService.loginUser(User);
   router.push({path: '/catalog'})
 }

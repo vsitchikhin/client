@@ -1,10 +1,10 @@
 <template>
   <div class="record-card">
     <div class="container">
-      <div class="record-card__header">{{ record?.service_name }}</div>
-      <div class="record-card__price">{{ record?.price }}</div>
-      <div class="record-card__master">{{record?.master_name}}</div>
-      <div class="record-card__date">{{date}}</div>
+      <div class="record-card__header">{{ record.value.name }}</div>
+      <div class="record-card__price">{{ record.value.price }}</div>
+      <div class="record-card__master">{{record.value.staff_name}}</div>
+      <div class="record-card__date">{{record.value.date}}</div>
     </div>
     <div class="record-card__delete" @click="deleteRecord">
       <svg class="feather feather-trash-2 record-card__trash" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
@@ -13,22 +13,18 @@
 </template>
 
 <script setup lang="ts">
-
-import {PropType} from 'vue';
-import {RecordDto} from 'stores/main.types';
 import {ServiceService} from 'stores/Service/service.service';
 
 const props = defineProps({
   record: {
-    type: Object as PropType<RecordDto>,
+    type: Object,
     required: true,
   }
 })
 
-const recordService = new ServiceService();
-console.log(props.record)
+console.log(props.record);
 
-const date = props.record?.date.toString().split('T')[0];
+const recordService = new ServiceService();
 
 function deleteRecord() {
   recordService.deleteRecord(props.record);

@@ -14,12 +14,11 @@
 <script setup lang="ts">
 import {useRouter} from 'vue-router';
 import {AuthService} from 'stores/Auth/auth.service';
-import {UserDto} from 'stores/main.types';
 
 const router = useRouter();
 const authService = new AuthService();
 
-const User: UserDto = {
+const User = {
   email: '',
   password: '',
   repPassword: '',

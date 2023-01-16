@@ -1,6 +1,6 @@
 <template>
   <div class="service-card">
-    <spa-image :src="service.url" class="service-card__image" />
+    <spa-image :src="service.image_url" class="service-card__image" />
     <div class="service-card__container">
       <div class="service-card__name">{{service.name}}</div>
       <div class="service-card__description">
@@ -15,15 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import {PropType} from 'vue';
-import {ServiceShortDto} from 'stores/main.types';
 import SpaImage from 'components/UI/SpaImage/SpaImage.vue';
 import TextShaver from 'components/UI/AuthIcon/TextShaver/TextShaver.vue';
 import {useRouter} from 'vue-router';
 
 const props = defineProps({
   service: {
-    type: Object as PropType<ServiceShortDto>,
+    type: Object,
     required: true,
   },
 })
@@ -32,7 +30,7 @@ const router = useRouter();
 
 
 function gotoService() {
-  router.push({ path: `/service/${props.service?.service_id}/` })
+  router.push({ path: `/service/${props.service?.id}/` })
 }
 </script>
 

@@ -6,12 +6,10 @@
 
 <script setup lang="ts">
 import StaffCard from 'components/UI/InfoGrid/StaffCard.vue';
-import {StaffDto} from 'stores/main.types';
-import {PropType} from 'vue';
 
 const props = defineProps({
   info: {
-    type: Array as PropType<StaffDto[]>,
+    type: Array,
     required: true,
   }
 })

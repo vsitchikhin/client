@@ -1,18 +1,16 @@
 <template>
   <div class="staff-card">
     <div class="staff-card__fio">{{staff.name}} {{staff.surname}}</div>
-    <spa-image :src="staff.url" class="staff-card__image" />
+    <spa-image :src="staff.image_url" class="staff-card__image" />
   </div>
 </template>
 
 <script setup lang="ts">
-import {StaffDto} from 'stores/main.types';
-import {PropType} from 'vue';
 import SpaImage from 'components/UI/SpaImage/SpaImage.vue';
 
 const props = defineProps({
   staff: {
-    type: Object as PropType<StaffDto>,
+    type: Object,
     required: true,
   }
 })

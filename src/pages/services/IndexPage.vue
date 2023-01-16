@@ -1,10 +1,10 @@
 <template>
   <div class="services">
     <div class="services__header">
-      {{ service?.service_name }}
+      {{ service?.name }}
     </div>
     <div class="services__image">
-      <spa-image :src="service?.url" />
+      <spa-image :src="service?.image_url" />
     </div>
     <div class="services__description">
       {{ service?.description }}
@@ -12,10 +12,10 @@
     <div class="services__info">
       <div class="services__date">Возможна запись на дату: {{ date[0] }}</div>
       <div class="services__info-staff">
-        К мастеру: {{ service?.name }} {{ service?.surname }}
+        К мастеру: {{ service?.staff_name }} {{ service?.staff_surname }}
       </div>
       <div class="service__info-price">
-        По цене: {{ service?.service_price }} ₽
+        По цене: {{ service?.price }} ₽
       </div>
     </div>
 
@@ -29,7 +29,6 @@ import { useRouter, useRoute } from 'vue-router';
 import { ServiceService } from 'stores/Service/service.service';
 import SpaImage from 'components/UI/SpaImage/SpaImage.vue';
 import { AuthService } from 'stores/Auth/auth.service';
-import { ServiceFullDto } from 'stores/main.types';
 const router = useRouter();
 const route = useRoute();
 
@@ -37,11 +36,11 @@ const serviceService = new ServiceService();
 const authService = new AuthService();
 
 serviceService.loadService(+route.params.id);
-const service = computed(() => serviceService.service[0]);
+const service = computed(() => serviceService.service);
 
 const user = authService.user;
 
-const date = computed(() => service.value?.date.toString().split('T') || '');
+const date = computed(() => service.value?.date);
 
 function createRecord() {
   if (!authService.user.email) {
@@ -49,13 +48,7 @@ function createRecord() {
     return;
   }
 
-  const body: any = {
-    date: service.value.date,
-    id: +route.params.id,
-    user_id: user.id,
-  };
-
-  serviceService.createRecord(body);
+  serviceService.createRecord(service);
 }
 </script>
 

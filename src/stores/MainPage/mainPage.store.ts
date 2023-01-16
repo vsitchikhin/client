@@ -1,21 +1,19 @@
 import { defineStore } from 'pinia';
-import {Image} from 'components/UI/ImageGallery/imageGallery.types';
-import {StaffDto} from 'stores/main.types';
 
 export const mainPageStore = defineStore({
   id: 'main',
 
   state: () => ({
-    mainImages: [] as Image[],
-    staff: [] as StaffDto[],
+    mainImages: [] as any[],
+    staff: [] as any[],
   }),
 
   actions: {
-    SET_IMAGES_PAYLOAD(payload: Image[]) {
+    SET_IMAGES_PAYLOAD(payload) {
       this.mainImages = payload;
     },
 
-    SET_STAFF_PAYLOAD(payload: StaffDto[]) {
+    SET_STAFF_PAYLOAD(payload) {
      this.staff = payload;
     }
   }
