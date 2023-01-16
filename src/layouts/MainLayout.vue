@@ -16,7 +16,7 @@
                 d="M.5 251.9c29.6-.5 59.2-.8 88.8-1l88.7-.3 88.7.3 44.4.4 44.4.6-44.4.6-44.4.4-88.7.3-88.7-.3a7981 7981 0 01-88.8-1z" />
           <path fill="none" d="M-565.2 324H-252v15.8h-313.2z" />
         </svg>
-      <header-name :name="'SPA Салон'" />
+      <header-name :name="'Бассеин'" />
       <template v-if="isUserLogined">
         <div class="main-layout__container">
           <div class="main-layout__user">{{user.name}} {{user.surname}}</div>

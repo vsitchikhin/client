@@ -33,8 +33,8 @@ export class AuthService extends Service {
       method: 'POST',
       body: JSON.stringify(user),
     }).then(res => res.json()).then(data => data);
-
     payload.then(res => {
+      console.log(res)
       this.store.SET_USER_PAYLOAD(res.payload[0])
     });
   }
